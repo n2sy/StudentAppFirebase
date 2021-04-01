@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".MainActivity">
+
+    <AutoCompleteTextView
+        android:id="@+id/saisieAuto"
+        android:layout_width="322dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@id/notesLst"
+        android:layout_alignRight="@id/notesLst"
+        android:layout_marginTop="76dp"
+        android:background="#994CAF50"
+        android:hint="Entrez le nom d'un étudiant"
+        android:textColor="#F3EFEF"
+        android:textColorHint="#9C27B0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.552"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/notesLst"
+        android:layout_width="325dp"
+        android:layout_height="299dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="36dp"
+        android:background="#4DFFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saisieAuto" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="50dp"
+        android:layout_height="47dp"
+        android:background="#3F51B5"
+        android:onClick="goToAdd"
+        android:text="+"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/saisieAuto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.551" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
