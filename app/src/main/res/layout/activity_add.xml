@@ -13,10 +13,10 @@
         android:layout_marginTop="148dp"
         android:layout_marginEnd="28dp"
         android:ems="10"
-        android:inputType="numberDecimal"
         android:hint="Big Data"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toStartOf="@+id/editNoteAndroid"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.322"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

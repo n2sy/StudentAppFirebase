@@ -57,12 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Student");
 
-        getData();
 
-        ArrayAdapter ar = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, this.allStudents);
-
-        autoSaisie.setAdapter(ar);
 
         autoSaisie.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -98,20 +93,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        getStudentsName();
+
+        ArrayAdapter ar = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, this.allStudents);
+
+        autoSaisie.setAdapter(ar);
 
     }
 
     public void goToAdd(View v) {
         Intent i = new Intent(this, AddActivity.class);
+        i.putExtra("child_name", "Student");
         startActivityForResult(i, 1);
     }
 
-    private void getData() {
+    private void getStudentsName() {
+        this.allStudents.clear();
 
-        // calling add value event listener method
-        // for getting the values from database.
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -119,12 +124,6 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     Student s = ds.getValue(Student.class);
                     allStudents.add(s.getName());
-//                    Notes.add(String.valueOf(s.getNoteAndroid()));
-//                    Notes.add(String.valueOf(s.getNoteAngular()));
-//                    Notes.add(String.valueOf(s.getNoteUX()));
-//                    Notes.add(String.valueOf(s.getNoteDB()));
-//                    Notes.add(String.valueOf(s.getNoteC()));
-//                    Notes.add(String.valueOf(s.getNoteBigData()));
 
                 }
 
@@ -133,8 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // calling on cancelled method when we receive
-                // any error or we are not able to get the data.
+
                 Toast.makeText(MainActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -149,23 +147,20 @@ public class MainActivity extends AppCompatActivity {
 
                     Student s = new Student();
                     s = snapshot.child(studentName).getValue(Student.class);
-                    if(s.getName().equals(studentName)) {
+                    if(s.getName().equals(studentName)) { //test facultatif
                         Notes.add(String.valueOf(s.getNoteAndroid()));
                         Notes.add(String.valueOf(s.getNoteAngular()));
                         Notes.add(String.valueOf(s.getNoteUX()));
                         Notes.add(String.valueOf(s.getNoteDB()));
                         Notes.add(String.valueOf(s.getNoteC()));
                         Notes.add(String.valueOf(s.getNoteBigData()));
-
                 }
 
-                //Toast.makeText(InfosActivity.this, value, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // calling on cancelled method when we receive
-                // any error or we are not able to get the data.
+
                 Toast.makeText(MainActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
             }
         });

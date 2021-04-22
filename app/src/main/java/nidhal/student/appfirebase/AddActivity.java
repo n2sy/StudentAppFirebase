@@ -2,6 +2,7 @@ package nidhal.student.appfirebase;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -39,10 +40,9 @@ public class AddActivity extends AppCompatActivity {
         this.editnote5 = findViewById(R.id.editNoteC);
         this.editnote6 = findViewById(R.id.editNoteBigData);
 
-        getIntent();
+        Intent i = getIntent(); // facultatif sauf si y'a un extra ou un data
 
-
-        reff = FirebaseDatabase.getInstance().getReference().child("Student");
+        reff = FirebaseDatabase.getInstance().getReference().child(i.getStringExtra("child_name"));
         student = new Student();
 
 
@@ -68,8 +68,8 @@ public class AddActivity extends AppCompatActivity {
         student.setNoteBigData(note6);
 
 
-        //reff.push().setValue(student);
-        reff.child(name).setValue(student);
+        reff.push().setValue(student);
+        //reff.child(name).setValue(student);
 
 
         Toast.makeText(getApplicationContext(), "Data inserted !", Toast.LENGTH_LONG).show();
